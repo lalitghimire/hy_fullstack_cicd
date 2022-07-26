@@ -10,14 +10,11 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Say hello
-        run: |
-          echo "Hello World!"
+        run: echo "Hello World!"
     steps:
       - name: Show date
-        run: |
-          date
+        run: date
     steps:
       - name: Show current directory 
-        run: |
-          ls -l      
+        run: ls -l      
 
