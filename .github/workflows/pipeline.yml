@@ -33,3 +33,6 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: 'fs-github-cicd'
           heroku_email: 'lalitghimire@gmail.com'
+          healthcheck: 'https://fs-github-cicd.herokuapp.com/health'
+          checkstring: 'ok'
+          versioncheck: 'https://fs-github-cicd.herokuapp.com/version'
