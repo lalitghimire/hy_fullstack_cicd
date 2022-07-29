@@ -32,7 +32,7 @@ jobs:
           wait-on: http://localhost:5000
       - name: deploy to heroku
         uses: akhileshns/heroku-deploy@v3.12.12
-        if: ${{ (github.event_name == 'push') && !contains(join(toJSON(github.event.commits.*.message), ''),'#skip') }}
+        if: ${{ (github.event_name == 'push') && !contains(join(toJSON(github.event.commits.*.message), ' '),'#skip') }}
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: 'fs-github-cicd'
@@ -45,6 +45,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Bump version and push tag
+        uses: actions/checkout@v3
         uses: anothrNick/github-tag-action@1.36.0
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
