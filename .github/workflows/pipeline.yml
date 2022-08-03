@@ -48,7 +48,7 @@ jobs:
           checkstring: 'ok'
           rollbackonhealthcheckfailed: true
 
-      - name: Deployment successfull
+      - name: Deployment successful to Discord
         uses: rjstone/discord-webhook-notify@v1
         if: success()
         with:

@@ -1,0 +1,16 @@
+name: Periodic health check
+
+on:
+  schedule:
+    - cron: '16 25 * * *'
+
+jobs:
+  periodic-health-check:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: periodic health check
+        uses: jtalk/url-health-check-action@v2
+        with:
+          url: https://fs-github-cicd.herokuapp.com/
+          max-attempts: 4
+          retry-delay: 10s
