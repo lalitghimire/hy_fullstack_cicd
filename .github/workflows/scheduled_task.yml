@@ -2,15 +2,29 @@ name: Periodic health check
 
 on:
   schedule:
-    - cron: '35 16 * * *'
+    - cron: '59 16 * * *'
 
 jobs:
   periodic-health-check:
     runs-on: ubuntu-20.04
     steps:
-      - name: periodic health check
+      - name: Periodic health check
         uses: jtalk/url-health-check-action@v2
         with:
           url: https://fs-github-cicd.herokuapp.com/
           max-attempts: 4
           retry-delay: 10s
+      - name: Periodic check sucess log to discord
+        uses: rjstone/discord-webhook-notify@v1
+        if: success()
+        with:
+          severity: info
+          details: Periodic check passed!
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: Periodic check fail to discord
+        uses: rjstone/discord-webhook-notify@v1
+        if: failure()
+        with:
+          severity: error
+          details: Periodic health check failed!
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
